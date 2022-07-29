@@ -1,0 +1,309 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
+/* Spesifik elemanlara yapılacak CSS işlemleri buraya yapılacak */
+
+/* Default margin ve paddingleri sıfırlayalım */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+/* HTML dökümanımızın font-size'ını belirleyelim ki bunları gelecekte REM&EM ile rahat şekilde orantısal olarak kullanabilelim */
+html {
+    font-size: 10px;
+    scroll-behavior: smooth;
+}
+
+/* Body konteynırımız içindeki genel görünümü düzenleyelim, satır yüksekliklerini ayarlayalım */
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.6rem;
+    background: #fff;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Genel kullandığımız listeler için list stillerini ayarlayalım */
+ul {
+    list-style: none;
+}
+
+/* a etiketleri Body'den kalıtım yoluyla renk alamadığı için onları da burada ayarlayalım */
+/* aynı zamanda linkerdeki default alt çizgileri de alalım */
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+/* Başlık etiketlerimiz için Font ayarlarını ve satır yüksekliklerini ayarlayalım*/
+h1, h2 {
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+/* Default olan margin ve paddingi kaldırdığımız için paragraf etiketlerimizin margin ve padding ayarlarını yapalım */
+p {
+    margin: 1rem 0;
+}
+
+/* Önceden sayfadaki bütün img içeriklerine ulaşıp bunlara bir width değeri verelim ki bulundukları konteynırı direkt tam kaplayıp responsive bir işleme sahip olsun */
+img {
+    width: 100%;
+}
+
+/* Hazır bir class oluşturalım ki class="" kısmına koyduğumuzda direkt ilgili içeriği merkeze konumlandırsın */
+.text-center {
+    text-align: center;
+}
+
+/* General CSS for Navbar */
+/* İlgili classa sahip konteynırı flexboxa çevirelim */
+/* Aynı zamanda içerikler de flex item olacak */
+/* Bu itemleri yan yana almak istediğimiz için dikeyde ortalayıp, yatayda aralarına orantılı boşluk bırakalım */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--dark);
+    opacity: 0.8;
+    color: #fff;
+    position: fixed; /* Navbar'ın konumu tepede sabit olarak kalmalı */
+    top: 0;
+    width: 100%; /* Position: fixed verince içerik, içeriğin kendisi kadar yer kaplıyordu fakat biz bunu istemediğimiz için width: 100% yapıp tekrar konteynır içine yaydık */
+    height: 70px; 
+    padding: 0 3rem;
+}
+
+/* Konteynırın kendisine verilen color rengi, alt elemanlar tarafından inherit edilemediğinden a etiketlerimizin rengini ayarlayalım */
+.navbar a {
+    color: #fff;
+    padding: 1rem 2rem;
+    margin: 0 .5rem;
+    scroll-behavior: smooth;
+}
+
+/* Navbar'ımızdaki linklere gelince bir hover olayı gerçekleşsin */
+.navbar a:hover {
+    border-bottom: 2px solid var(--warning);
+}
+
+/* Konteynıra Flex verdiğimizde elemanlar yan yana gelse bile, bu elemanlardan biri 
+bir liste elemanı serisi ise o serideki elemanlar kendi aralarında yan yana gelmez */
+/* Bunu ayarlayalım */
+.navbar ul {
+    display: flex;
+}
+
+/* Navbar'daki başlığımızın konteynırının font ayarını yapalım */
+.navbar .brand {
+    font-weight: 400;
+}
+
+/* Navbar'daki başlığımızın font ayarlarını yapalım */
+.navbar h1 {
+    font-size: 3rem;
+}
+
+.navbar span {
+    color: var(--warning);
+}
+
+/* Header kısmımızın arka zemin resmini yerleştirip, navbar ve main kısmımızı düzenleyelim  */
+.main-header {
+    background-image: url('../img/bg-1.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    color: #fff;
+    position: relative;
+}
+
+.main-header.blog {
+    background-image: url('../img/bg-2.jpeg');
+    height: 50vh;
+}
+
+/* Main Header içeriğimizi sayfanın tam ortasında görünecek şekilde ayarlayalım */
+.main-header .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%; /* Bunu yapmazsak content divinin yüksekliği, içerik kadar kalır. Biz bu content divinin 
+                     yüksekliğinin, ilgili headerın yüksekliği kadar olması gerekli ki içerik Header'ın tam ortasına denk gelsin */
+}
+
+/* Background görselinin parlaklığını ayarlamak ve main-header'a yazdığımız yazıları
+   iyice ön plana almak için ViewPort'umuzun önüne şeffaf bir tabaka-düzlem ekleyelim */
+.main-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+}
+
+/* Son aşamada tekrar main header'a gelelim ve bu div'deki bütün içeriklerin, 
+az önce yaptığımız şeffaf tabakanın önünde göründüğünden emin olalım */
+.main-header * {
+    z-index: 5;
+}
+
+/* Main-Header içeriklerinin güzelleştirme işlemlerini yapalım */
+.main-header .content h1 {
+    font-size: 5.5rem;
+}
+
+.main-header .content p {
+    font-size: 2.3rem;
+    max-width: 60rem;
+    margin: 2rem 0 3rem;
+}
+
+/* Servislerimizin ikonlarının CSS'lerini yazalım  */
+.icons {
+    padding: 3rem;
+}
+
+.icons h3 {
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+}
+
+.icons i {
+    background-color: var(--primary);
+    color: #fff;
+    padding: 1rem;
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+}
+
+/* Hakkımızda segmentimizin genel yazı rengini ayarlayalım */
+.about {
+    color: #fff;
+}
+
+/* Hakkımızda segmentimizdeki başlık ve paragraf etiketlerimizi düzenleyelim */
+.about h2 {
+    font-size: 4rem;
+    font-weight: 400;
+}
+
+.about p{
+    margin: 2rem 0;
+}
+
+/* Galerimizin img içeriklerini düzenleyelim */
+.gallery img:hover {
+    cursor: pointer;
+    opacity: .8;
+}
+
+/* Sitede kullanacağımız kartları düzenleyelim */
+.card {
+    color: #fff;
+    font-weight: 700;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+/* Site Personelinin Resimlerini düzenleyelim  */
+.teams img {
+    border-radius: 50%;
+}
+
+.teams img:hover {
+    opacity: .7;
+}
+
+/* İletişim kısmımızın ve formlarının düzenlemelerini yapalım */
+.contact-form {
+    width: 100%;
+    padding: 2rem 0;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: .5rem;
+}
+
+.contact-form .form-control {
+    margin-bottom: 1.5rem;
+}
+
+.contact-form input {
+    width: 100%;
+    padding: 5px;
+    height: 40px;
+    border: 1px solid #f5f5f5;
+}
+
+.contact-form .btn {
+    margin-top: 20px;
+}
+
+.contact h2 {
+    font-size: 4rem;
+}
+
+/* Blog Makaleleri */
+.articles {
+    padding: .5rem 1.5rem;
+}
+
+.article {
+    margin-top: 1.5rem;
+    color: #fff;
+}
+
+/* Footer İçeriklerimizi Ayarlayalım */
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 200px;
+}
+
+.footer a {
+    color: var(--danger);
+}
+
+.footer a:hover {
+    opacity: .7;
+}
+
+.footer .social a {
+    margin-right: 10px;
+}
+
+/* Artık uygulamamızı Responsive hale getirebiliriz */
+/* mobile */
+@media(max-width: 768px) {
+    html {
+        font-size: 8px;
+    }
+
+    /* Navbar'da bu aşamada itemlerin yan yana değil, alt alta sıralanması gerekmektedir */
+    .navbar {
+        flex-direction: column;
+        height: 120px;
+        padding: 25px;
+    }
+
+    .navbar a {
+        padding: 10px;
+        margin: 0 3px;
+    }
+
+    .teams img {
+        width: 70%;
+    }
+}
